@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.CameraTool;
 using Code.NPCs;
@@ -13,7 +14,7 @@ public class NotableObject : MonoBehaviour
     public float MaxDistanceDetectableZoomDistanceMultiplier = 1;
     private NotableObjectService NotableObjectService;
 
-    public List<Collider> CameraTargetColliders = new ();
+    public List<Collider> CameraTargetColliders = new();
 
     [Tooltip(
         "These points must ALL be visible for the camera to count it as detecting notable object" +
@@ -21,6 +22,10 @@ public class NotableObject : MonoBehaviour
     )]
     private Collider collider_;
     public PlayMakerFSM LinkedFSM;
+
+
+    //alan code I like action events over FSM in PlayMaker
+    public event Action onCapture;
 
     public void Awake()
     {
@@ -83,5 +88,7 @@ public class NotableObject : MonoBehaviour
         {
             LinkedFSM.SendEvent("Captured");
         }
+        // listend to by my squash and color change scripts
+        onCapture?.Invoke();
     }
 }

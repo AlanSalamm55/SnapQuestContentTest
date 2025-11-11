@@ -169,6 +169,7 @@ namespace Code.CameraTool
                     $"{mostNotable.DisplayName}";
                 
                 mostNotable.SendCapturedEvent();
+                CameraToolUI.CameraZoomSFX.Play();
             }
         }
         public List<NotableObject> DetectWhatsInScreen()
