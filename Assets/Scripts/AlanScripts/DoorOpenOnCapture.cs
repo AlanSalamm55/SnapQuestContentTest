@@ -35,7 +35,6 @@ public class DoorOpenOnCapture : MonoBehaviour
     {
         if (opened) return;
         opened = true;
-        Debug.Log("jj");
 
         // open door
         door.DOLocalMove(door.localPosition + openOffset, openTime).SetEase(Ease.OutCubic);
