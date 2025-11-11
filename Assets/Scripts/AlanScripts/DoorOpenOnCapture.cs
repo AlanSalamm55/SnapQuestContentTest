@@ -4,19 +4,25 @@ using Cinemachine;
 
 public class DoorOpenOnCapture : MonoBehaviour
 {
-    [SerializeField] NotableObject target;          // the notable to listen to
-    [SerializeField] Transform door;                // defaults to this transform
-    [SerializeField] Vector3 openOffset = new Vector3(0, 3, 0);
-    [SerializeField] float openTime = 0.4f;
+    [SerializeField] private NotableObject target;
+    [SerializeField] private Transform door;
+    [SerializeField] private Vector3 openOffset = new Vector3(0, 3, 0);
+    [SerializeField] private float openTime = 0.4f;
 
-    [Header("Cinemachine Shake (optional)")]
-    [SerializeField] CinemachineVirtualCamera vcam;
-    [SerializeField] CinemachineVirtualCamera vcam2;
-    [SerializeField] float shakeAmp = 1.2f;
-    [SerializeField] float shakeFreq = 2f;
-    [SerializeField] float shakeTime = 0.25f;
 
-    bool opened;
+    [Header("Cinemachine Shake)")]
+    [SerializeField] private CinemachineVirtualCamera vcam;
+    [SerializeField] private CinemachineVirtualCamera vcam2;
+    [SerializeField] private float shakeAmp = 1.2f;
+    [SerializeField] private float shakeFreq = 2f;
+    [SerializeField] private float shakeTime = 0.25f;
+
+    private bool opened;
+
+
+    [Header("Sound")]
+    [SerializeField] private AudioSource openSound;
+
 
     void Start()
     {
@@ -33,8 +39,8 @@ public class DoorOpenOnCapture : MonoBehaviour
 
         // open door
         door.DOLocalMove(door.localPosition + openOffset, openTime).SetEase(Ease.OutCubic);
+        openSound.Play();
 
-        // shake camera (if assigned & has noise)
         if (vcam)
         {
             var noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
