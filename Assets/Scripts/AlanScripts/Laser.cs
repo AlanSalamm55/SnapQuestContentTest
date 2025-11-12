@@ -8,10 +8,9 @@ public class Laser : MonoBehaviour
     [SerializeField] Transform startPoint;
     [SerializeField] bool reflectOnlyMirror = false;
 
-
     [SerializeField] string finalTag = "Receiver";
-    public  event Action OnLaserHitTarget; 
-
+    public event Action OnLaserHitTarget;
+    private bool calledOnce = false;
     LineRenderer lr;
 
     void Start()
@@ -38,7 +37,10 @@ public class Laser : MonoBehaviour
                 // check for special hit
                 if (hit.transform.CompareTag(finalTag))
                 {
+                    if (calledOnce) return;
+
                     OnLaserHitTarget?.Invoke(); // trigger event
+                    calledOnce = true;
                     break;
                 }
 

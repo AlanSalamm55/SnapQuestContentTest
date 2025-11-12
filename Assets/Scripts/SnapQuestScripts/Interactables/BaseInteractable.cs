@@ -40,7 +40,7 @@ public class BaseInteractable : MonoBehaviour, IInteractable
 
     private void OnDestroy()
     {
-        InteractableDetector.UnregisterInteractableObject(transform);
+        InteractableDetector?.UnregisterInteractableObject(transform);
     }
 
     private void OnDisable()
@@ -50,7 +50,7 @@ public class BaseInteractable : MonoBehaviour, IInteractable
 
     private void OnEnable()
     {
-        if(InteractableDetector != null)
+        if (InteractableDetector != null)
             InteractableDetector.RegisterInteractableObject(this, transform);
     }
 
